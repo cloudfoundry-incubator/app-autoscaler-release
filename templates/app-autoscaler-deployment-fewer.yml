@@ -138,7 +138,7 @@ instance_groups:
             port: &scalingEngineHealthPort 6204
           defaultCoolDownSecs: 300
           lockSize: 32
-          ca_cert: ((scalingengine_ca.ca))
+          ca_cert: ((scalingengine_server.ca))
           server_cert: ((scalingengine_server.certificate))
           server_key: ((scalingengine_server.private_key))
           require_consul: true
@@ -154,11 +154,11 @@ instance_groups:
           job_reschedule_interval_millisecond: 10000
           job_reschedule_maxcount: 6
           notification_reschedule_maxcount: 3
-          ca_cert: ((scheduler_ca.ca))
+          ca_cert: ((scheduler_server.ca))
           server_cert: ((scheduler_server.certificate))
           server_key: ((scheduler_server.private_key))
           scaling_engine:
-            ca_cert: ((scalingengine_ca.ca))
+            ca_cert: ((scalingengine_client.ca))
             client_cert: ((scalingengine_client.certificate))
             client_key: ((scalingengine_client.private_key))
           require_consul: false
@@ -182,14 +182,14 @@ instance_groups:
           app_sync_interval: 24h
           scaling_engine:
             port: *scalingEnginePort
-            ca_cert: ((scalingengine_ca.ca))
+            ca_cert: ((scalingengine_client.ca))
             client_cert: ((scalingengine_client.certificate))
-            client_key: ((scalingengine_client.private_key))                
+            client_key: ((scalingengine_client.private_key))
           scheduler:
             port: *schedulerPort
-            ca_cert: ((scheduler_ca.ca))
+            ca_cert: ((scheduler_client.ca))
             client_cert: ((scheduler_client.certificate))
-            client_key: ((scheduler_client.private_key))        
+            client_key: ((scheduler_client.private_key))
           db_lock: 
             ttl: 15s
             retry_interval: 5s
@@ -234,34 +234,34 @@ instance_groups:
           http_client_timeout: 60000
           service_offering_enabled: true
           db_config: &db_config
-            idle_timeout: 60000
+            idle_timeout: 1000
             max_connections: 10
             min_connections: 0
           port: 6100
           publicPort: &apiServerPublicPort 6106
           health:
             port: 6200
-          ca_cert: ((apiserver_ca.ca))
+          ca_cert: ((apiserver_server.ca))
           server_cert: ((apiserver_server.certificate))
           server_key:  ((apiserver_server.private_key))
           scheduler:
-            ca_cert: ((scheduler_ca.ca))
+            ca_cert: ((scheduler_client.ca))
             client_cert: ((scheduler_client.certificate))
             client_key: ((scheduler_client.private_key))
           scaling_engine:
-            ca_cert: ((scalingengine_ca.ca))
+            ca_cert: ((scalingengine_client.ca))
             client_cert: ((scalingengine_client.certificate))
             client_key: ((scalingengine_client.private_key))
           metrics_collector:
-            ca_cert: ((metricscollector_ca.ca))
+            ca_cert: ((metricscollector_client.ca))
             client_cert: ((metricscollector_client.certificate))
             client_key: ((metricscollector_client.private_key))
           eventgenerator:
-            ca_cert: ((eventgenerator_ca.ca))
+            ca_cert: ((eventgenerator_client.ca))
             client_cert: ((eventgenerator_client.certificate))
-            client_key: ((eventgenerator_client.private_key))               
+            client_key: ((eventgenerator_client.private_key))
           service_broker:
-            ca_cert: ((servicebroker_ca.ca))
+            ca_cert: ((servicebroker_client.ca))
             client_cert: ((servicebroker_client.certificate))
             client_key: ((servicebroker_client.private_key))
           require_consul: true
@@ -278,10 +278,10 @@ instance_groups:
           port: 6107
           health:
             port: 6201
-          ca_cert: ((servicebroker_ca.ca))
+          ca_cert: ((servicebroker_server.ca))
           server_cert: ((servicebroker_server.certificate))
           server_key: ((servicebroker_server.private_key))
-          public_ca_cert: ((servicebroker_public_ca.ca))
+          public_ca_cert: ((servicebroker_public_server.ca))
           public_server_cert: ((servicebroker_public_server.certificate))
           public_server_key: ((servicebroker_public_server.private_key))
           username: autoscaler_service_broker_user
@@ -299,7 +299,7 @@ instance_groups:
                 name: autoscaler-free-plan
                 description: This is the free service plan for the Auto-Scaling service.
           api_server:
-            ca_cert: ((apiserver_ca.ca))
+            ca_cert: ((apiserver_client.ca))
             client_cert: ((apiserver_client.certificate))
             client_key: ((apiserver_client.private_key))
           require_consul: false
@@ -380,7 +380,7 @@ instance_groups:
             refresh_interval: 60s
             collect_interval: 30s
             save_interval: 5s
-          ca_cert: ((metricscollector_ca.ca))
+          ca_cert: ((metricscollector_server.ca))
           server_cert: ((metricscollector_server.certificate))
           server_key: ((metricscollector_server.private_key))
           require_consul: true
@@ -400,7 +400,7 @@ instance_groups:
             port: &eventGeneratorPort 6105
           health:
             port: &eventGeneratorHealthPort 6205
-          ca_cert: ((eventgenerator_ca.ca))
+          ca_cert: ((eventgenerator_server.ca))
           server_cert: ((eventgenerator_server.certificate))
           server_key: ((eventgenerator_server.private_key))
           aggregator:
@@ -423,13 +423,13 @@ instance_groups:
           scaling_engine:
             host: scalingengine.service.cf.internal
             port: *scalingEnginePort
-            ca_cert: ((scalingengine_ca.ca))
+            ca_cert: ((scalingengine_client.ca))
             client_cert: ((scalingengine_client.certificate))
             client_key: ((scalingengine_client.private_key))
           metricscollector:
             host: metricscollector.service.cf.internal
             port: *metricsCollectorPort
-            ca_cert: ((metricscollector_ca.ca))
+            ca_cert: ((metricscollector_client.ca))
             client_cert: ((metricscollector_client.certificate))
             client_key: ((metricscollector_client.private_key))
           require_consul: false
