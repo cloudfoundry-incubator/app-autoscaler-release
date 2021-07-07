@@ -5,5 +5,8 @@ export PATH=$GOROOT/bin:$PATH
 export GOPATH=${BOSH_COMPILE_TARGET}/app-autoscaler
 export GOCACHE=/tmp/gocache
 
-go install autoscaler/metricsforwarder/cmd/metricsforwarder
-cp -a ${BOSH_COMPILE_TARGET}/app-autoscaler/bin/metricsforwarder ${BOSH_INSTALL_TARGET}
+pushd ${BOSH_COMPILE_TARGET}/app-autoscaler/src/autoscaler
+  make build-metricsforwarder
+popd
+
+cp -a ${BOSH_COMPILE_TARGET}/app-autoscaler/src/autoscaler/build/metricsforwarder ${BOSH_INSTALL_TARGET}

@@ -6,14 +6,6 @@ maven/apache-maven-3.5.4-bin.tar.gz:
   size: 8842660
   object_id: b5e0cf3e-032e-4fdf-64f8-f0519281a3a1
   sha: sha256:ce50b1c91364cb77efe3776f756a6d92b76d9038b0a0782f7d53acf1e997a14d
-nodejs/node-v8.11.4-darwin-x64.tar.gz:
-  size: 16042407
-  object_id: cc5c6ea9-9f1c-4c9d-7fe7-b1c0fd50e72c
-  sha: sha256:aa1de83b388581d0d9ec3276f4526ee67e17e0f1bc0deb5133f960ce5dc9f1ef
-nodejs/node-v8.11.4-linux-x64.tar.xz:
-  size: 11351232
-  object_id: 74319675-b9d5-4e07-58f1-b632aa7ba7c1
-  sha: sha256:85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c
 openjdk/openjdk-10.0.1_linux-x64_bin.tar.gz:
   size: 204885801
   object_id: b4e6fb76-a537-4a4d-53d9-e3a84fe613b6

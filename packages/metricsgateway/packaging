@@ -5,5 +5,8 @@ export PATH=$GOROOT/bin:$PATH
 export GOPATH=${BOSH_COMPILE_TARGET}/app-autoscaler
 export GOCACHE=/tmp/gocache
 
-go install autoscaler/metricsgateway/cmd/metricsgateway
-cp -a ${BOSH_COMPILE_TARGET}/app-autoscaler/bin/metricsgateway ${BOSH_INSTALL_TARGET}
+pushd ${BOSH_COMPILE_TARGET}/app-autoscaler/src/autoscaler
+  make build-metricsgateway
+popd
+
+cp -a ${BOSH_COMPILE_TARGET}/app-autoscaler/src/autoscaler/build/metricsgateway ${BOSH_INSTALL_TARGET}

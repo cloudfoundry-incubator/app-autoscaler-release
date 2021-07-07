@@ -5,6 +5,6 @@ export PATH=$GOROOT/bin:$PATH
 export GOPATH=${BOSH_COMPILE_TARGET}
 export GOCACHE=/tmp/gocache
 
-mkdir ${GOPATH}/src && mv changeloglockcleaner ${GOPATH}/src/ && mv github.com ${GOPATH}/src/
+mkdir ${GOPATH}/src && mv changeloglockcleaner ${GOPATH}/src/
 go install changeloglockcleaner
 cp -a ${BOSH_COMPILE_TARGET}/bin/changeloglockcleaner ${BOSH_INSTALL_TARGET}

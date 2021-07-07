@@ -5,10 +5,13 @@ export PATH=$GOROOT/bin:$PATH
 export GOPATH=${BOSH_COMPILE_TARGET}/app-autoscaler
 export GOCACHE=/tmp/gocache
 
-go install autoscaler/api/cmd/api
-cp -a ${BOSH_COMPILE_TARGET}/app-autoscaler/bin/api ${BOSH_INSTALL_TARGET}
-cp -a ${BOSH_COMPILE_TARGET}/app-autoscaler/api/db/api.db.changelog.yml ${BOSH_INSTALL_TARGET}
-cp -a ${BOSH_COMPILE_TARGET}/app-autoscaler/servicebroker/db/servicebroker.db.changelog.json ${BOSH_INSTALL_TARGET}
+pushd ${BOSH_COMPILE_TARGET}/app-autoscaler/src/autoscaler
+  make build-api
+popd
+
+cp -a ${BOSH_COMPILE_TARGET}/app-autoscaler/src/autoscaler/build/api ${BOSH_INSTALL_TARGET}
+cp -a ${BOSH_COMPILE_TARGET}/app-autoscaler/src/autoscaler/api/db/api.db.changelog.yml ${BOSH_INSTALL_TARGET}
+cp -a ${BOSH_COMPILE_TARGET}/app-autoscaler/src/autoscaler/servicebroker/db/servicebroker.db.changelog.json ${BOSH_INSTALL_TARGET}
 
 cp -a ${BOSH_COMPILE_TARGET}/app-autoscaler/src/autoscaler/api/policyvalidator/policy_json.schema.json ${BOSH_INSTALL_TARGET}
 cp -a ${BOSH_COMPILE_TARGET}/app-autoscaler/src/autoscaler/api/schemas/catalog.schema.json ${BOSH_INSTALL_TARGET}

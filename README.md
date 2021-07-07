@@ -51,7 +51,7 @@ The purpose of this bosh release is to deploy and setup the [app-autoscaler](htt
 * Create and upload App-Autoscaler release
 
 ```sh
-git clone https://github.com/cloudfoundry-incubator/app-autoscaler-release
+git clone https://github.com/cloudfoundry/app-autoscaler-release
 cd app-autoscaler-release
 ./scripts/update
 bosh create-release

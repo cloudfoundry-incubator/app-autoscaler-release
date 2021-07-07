@@ -50,13 +50,13 @@ spring.datasource.password=<%=schedulerdb_role['password'] %>
 #datasource for policy 
 
 <% if policydb_scheme == "postgres" %>
-spring.policyDbDataSource.driverClassName=org.postgresql.Driver
+spring.policy-db-datasource.driverClassName=org.postgresql.Driver
 <% else %>
-spring.policyDbDataSource.driverClassName=com.mysql.cj.jdbc.Driver
+spring.policy-db-datasource.driverClassName=com.mysql.cj.jdbc.Driver
 <% end %>
-spring.policyDbDataSource.url=<%=policydb_url %>
-spring.policyDbDataSource.password=<%=policydb_role['password'] %>
-spring.policyDbDataSource.username=<%=policydb_role['name'] %>
+spring.policy-db-datasource.url=<%=policydb_url %>
+spring.policy-db-datasource.password=<%=policydb_role['password'] %>
+spring.policy-db-datasource.username=<%=policydb_role['name'] %>
 
 
 #quartz job
@@ -76,7 +76,7 @@ server.ssl.trust-store=/var/vcap/data/certs/scheduler/cacerts
 server.ssl.trust-store-password=123456
 #to prevent logjam vulnerability
 server.ssl.enabled-protocols=TLSv1.2
-server.ssl.ciphers[23]=TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,SSL_RSA_WITH_RC4_128_SHA
+server.ssl.ciphers=TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,SSL_RSA_WITH_RC4_128_SHA
 
 
 # Client key and trust store for communication with the scaling engine.
@@ -99,5 +99,6 @@ scheduler.healthserver.port=<%=p('autoscaler.scheduler.health.port') %>
 spring.application.name=scheduler
 spring.mvc.servlet.load-on-startup=1
 spring.aop.auto=false
-endpoints.enabled=false
+management.endpoints.enabled=false
 spring.data.jpa.repositories.enabled=false
+spring.main.allow-bean-definition-overriding=true

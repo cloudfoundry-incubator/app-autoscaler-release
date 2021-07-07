@@ -1,27 +1,3 @@
 [submodule "src/app-autoscaler"]
 	path = src/app-autoscaler
-	url = https://github.com/cloudfoundry-incubator/app-autoscaler.git
-[submodule "src/github.com/cloudfoundry-incubator/cf-test-helpers"]
-	path = src/github.com/cloudfoundry-incubator/cf-test-helpers
-	url = https://github.com/cloudfoundry-incubator/cf-test-helpers.git
-[submodule "src/github.com/onsi/ginkgo"]
-	path = src/github.com/onsi/ginkgo
-	url = https://github.com/onsi/ginkgo
-[submodule "src/github.com/onsi/gomega"]
-	path = src/github.com/onsi/gomega
-	url = https://github.com/onsi/gomega
-[submodule "src/github.com/nu7hatch/gouuid"]
-	path = src/github.com/nu7hatch/gouuid
-	url = https://github.com/nu7hatch/gouuid
-[submodule "src/gopkg.in/yaml.v2"]
-	path = src/gopkg.in/yaml.v2
-	url = https://gopkg.in/yaml.v2
-[submodule "src/github.com/lib/pq"]
-	path = src/github.com/lib/pq
-	url = https://github.com/lib/pq
-[submodule "src/github.com/jmoiron/sqlx"]
-	path = src/github.com/jmoiron/sqlx
-	url = https://github.com/jmoiron/sqlx
-[submodule "src/github.com/go-sql-driver/mysql"]
-	path = src/github.com/go-sql-driver/mysql
-	url = https://github.com/go-sql-driver/mysql
+	url = https://github.com/cloudfoundry/app-autoscaler.git

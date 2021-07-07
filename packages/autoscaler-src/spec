@@ -1,8 +1,5 @@
 ---
-name: operator
-
-dependencies:
-- golang
+name: autoscaler-src
 
 files:
 - app-autoscaler/src/autoscaler/**/*

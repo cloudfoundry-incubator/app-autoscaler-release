@@ -1,0 +1,56 @@
+name: bosh-release
+on:
+  pull_request:
+  workflow_dispatch:  
+jobs:
+  bosh-release:
+    name: Create Bosh Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Determine Go Version
+        id: go
+        run: |
+          GO_VERSION=$(cat packages/golang/spec | grep linux | sed 's/.linux-amd64.tar.gz//' | sed 's/- golang\/go//' | xargs)
+          echo "::set-output name=version::${GO_VERSION}"
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          #go-version: ${{ steps.go.outputs.version }}
+          go-version: 1.15
+
+      - name: Update
+        if: ${{ env.ACT }}
+        run: |
+          git submodule foreach --recursive git submodule sync && git submodule update --init --recursive
+
+      - name: Vendor Golang Dependencies
+        run: |
+          pushd src/changeloglockcleaner
+            echo "::group::go mod download"
+            go mod download
+            echo "::endgroup::"
+
+            echo "::group::go mod vendor"
+            go mod vendor
+            echo "::endgroup::"
+            ls -la
+          popd
+          pushd src/app-autoscaler/src/autoscaler
+            echo "::group::go mod download"
+            go mod download
+            echo "::endgroup::"
+            
+            echo "::group::go mod vendor"
+            go mod vendor
+            echo "::endgroup::"
+            ls -la
+          popd
+            
+      - name: Build Dev Release
+        uses: garethjevans/bosh-release-action@v1.0.2
