@@ -3,6 +3,7 @@ name: operator
 
 dependencies:
 - golang
+- autoscaler-src
 
 files:
 - app-autoscaler/src/autoscaler/**/*

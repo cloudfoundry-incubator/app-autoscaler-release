@@ -1,18 +1,16 @@
 # abort script on any command that exits with a non zero value
 set -e
 
-source common/java-helper.sh
 
-# Setting up required dependencies
-setup_java
-setup_maven
+export JAVA_HOME=$(readlink -nf /var/vcap/packages/java)
+export M2_HOME=$(readlink -nf /var/vcap/packages/maven)
 
-cd ${BUILD_DIR}/app-autoscaler/scheduler && mvn clean package -Dmaven.test.skip=true
+export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
 
-# Cleaning up
-rm -rf common/java-helper.sh
-cleanup_java
-cleanup_maven
+
+pushd app-autoscaler/scheduler
+  mvn --no-transfer-progress clean package -Dmaven.test.skip=true
+popd
 
 cp -R app-autoscaler/scheduler/db ${BOSH_INSTALL_TARGET}
 cp app-autoscaler/scheduler/target/scheduler-*.war ${BOSH_INSTALL_TARGET}

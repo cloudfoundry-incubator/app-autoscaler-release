@@ -38,7 +38,6 @@ jobs:
             echo "::group::go mod vendor"
             go mod vendor
             echo "::endgroup::"
-            ls -la
           popd
           pushd src/app-autoscaler/src/autoscaler
             echo "::group::go mod download"
@@ -48,8 +47,14 @@ jobs:
             echo "::group::go mod vendor"
             go mod vendor
             echo "::endgroup::"
-            ls -la
           popd
             
       - name: Build Dev Release
+        id: build
         uses: garethjevans/bosh-release-action@v1.0.2
+
+      - name: Compile Dev Release
+        uses: garethjevans/bosh-compile@main
+        with:
+          file: ${{ steps.build.outputs.file }}
+          args: -p db -p scheduler -p changeloglockcleaner -p eventgenerator -p golangapiserver -p metricsforwarder -p metricsgateway -p metricsserver -p operator -p scalingengine

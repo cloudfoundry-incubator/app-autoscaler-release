@@ -1,7 +1,6 @@
-set -e
+set -e -x 
 
 source common/java-helper.sh
 
 # Setting up required dependencies
 setup_maven
-cleanup_maven

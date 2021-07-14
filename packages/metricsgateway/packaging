@@ -1,12 +1,13 @@
 set -e -x
 
 export GOROOT=$(readlink -nf /var/vcap/packages/golang)
+export SOURCE=$(readlink -nf /var/vcap/packages/autoscaler-src)
 export PATH=$GOROOT/bin:$PATH
 export GOPATH=${BOSH_COMPILE_TARGET}/app-autoscaler
 export GOCACHE=/tmp/gocache
 
-pushd ${BOSH_COMPILE_TARGET}/app-autoscaler/src/autoscaler
-  make build-metricsgateway
+pushd ${SOURCE}/src/autoscaler
+  GOPROXY=off make build-metricsgateway
 popd
 
-cp -a ${BOSH_COMPILE_TARGET}/app-autoscaler/src/autoscaler/build/metricsgateway ${BOSH_INSTALL_TARGET}
+cp -a ${SOURCE}/src/autoscaler/build/metricsgateway ${BOSH_INSTALL_TARGET}
